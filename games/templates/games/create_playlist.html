@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Playlist</title>
+</head>
+<body>
+
+    <h1>🎮 Create / Update Playlist</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Optional name (only useful if you later allow multiple playlists) -->
+        <input type="text" name="name" placeholder="Playlist name (optional)">
+
+        <h3>Your Purchased Games</h3>
+
+        {% if games %}
+            {% for game in games %}
+                <div>
+                    <input type="checkbox" name="games" value="{{ game.id }}">
+                    {{ game.title }} ({{ game.genre }})
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You have no purchased games yet.</p>
+        {% endif %}
+
+        <br>
+        <button type="submit">💾 Save Playlist</button>
+    </form>
+
+    <br>
+
+    <a href="{% url 'home' %}">⬅ Back to Home</a>
+
+</body>

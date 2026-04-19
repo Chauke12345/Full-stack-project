@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}GameHub{% endblock %}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            margin: 0;
+        }
+
+        .navbar {
+            background: #020617;
+            padding: 10px 20px;
+            text-align: right;
+        }
+
+        .navbar a {
+            color: #38bdf8;
+            margin-left: 15px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #22c55e;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #16a34a;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background: #444;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+
+<h2>Create Account</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <p>
+            {{ field.label_tag }}<br>
+            {{ field }}
+
+            {% if field.errors %}
+                <span style="color:red;">
+                    {{ field.errors }}
+                </span>
+            {% endif %}
+        </p>
+    {% endfor %}
+
+    <button type="submit">Register</button>
+</form>
+
+</body>
+</html>

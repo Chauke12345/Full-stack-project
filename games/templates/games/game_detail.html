@@ -1,0 +1,120 @@
+{% extends "games/base.html" %}
+{% load static %}
+
+{% block title %}{{ game.title }} | GameHub{% endblock %}
+
+{% block content %}
+<style>
+  .container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .game-card {
+    background: #1e1e1e;
+    color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    padding: 20px;
+  }
+
+  .game-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #ff3c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background: #e62e2e;
+  }
+
+  .btn-secondary {
+    background: #444;
+  }
+
+  .btn-secondary:hover {
+    background: #666;
+  }
+
+  .desc {
+    color: #ccc;
+    line-height: 1.6;
+
+    
+  }
+</style>
+
+<div class="container">
+  <div class="game-card">
+    <h1>{{ game.title }}</h1>
+
+    <p class="desc">{{ game.description }}</p>
+
+    {% if game.image %}
+      <img src="{{ game.image.url }}" alt="{{ game.title }}">
+    {% endif %}
+
+    {% if game.preview_video %}
+      <a class="btn" href="{{ game.preview_video }}" target="_blank" rel="noopener noreferrer">
+        ▶ Watch Preview
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="action-buttons">
+    <p><strong>Price:</strong> ${{ game.price }}</p>
+
+   {% if user.is_authenticated %}
+    {% if game in user.playlist.games.all %}
+        <p>✅ Already in your playlist</p>
+    {% else %}
+   <a href="{% url 'purchase_game' game.id %}" class="buy-btn">
+    💳 Buy Game
+</a>
+    {% endif %}
+{% else %}
+    
+{% endif %}
+
+      <!-- Play Online Button -->
+      {% if game.play_url %}
+        <a href="{% url 'play_online' game.id %}" class="btn play-btn">
+          🎮 Play Online
+        </a>
+      {% endif %}
+
+</a>
+    </a>
+</div><a href="{% url 'home' %}" class="btn back-btn">
+    ⬅ Back to Home
+</a>
+    </a>
+</div>
+{% if owned %}
+    <a href="{% url 'download_receipt' game.id %}" class="receipt-btn">
+        🧾 Download Receipt
+    </a>
+{% endif %}
+
+      </a>
+
+
+  </div>
+</div>
+
+{% endblock %}
